@@ -1,0 +1,54 @@
+--Assignment :
+--	Create table with name Employee Data
+--		Column name :
+--			Employee id -> PK and identity
+--			Employee Name
+--			Employee Age
+--			Employee Role
+--			Employee Mobile no
+
+--	Create SP for employee data that select data based on employee name
+	
+	Create procedure SP_SelectEmployeeData
+(
+	@EmployeeName nvarchar(50)
+)
+As
+Begin
+	Select Employee_ID,Employee_Name,Employee_Age,Employee_Role,Employee_Salary,Employee_MobileNo 
+	from tbl_EmployeeData
+	where Employee_Name = @EmployeeName
+End
+
+
+exec SP_SelectEmployeeData 'Kiran'
+
+
+-- Assignment :
+	-- Create store procedure with multiple parameters for update and delete
+
+	--update
+
+Create procedure SP_updateEmployeeData
+(
+	@Employee_Id int,
+	@Employee_Salary decimal(18,2)
+)
+As
+begin
+	update tbl_EmployeeData 
+	set Employee_Salary = @Employee_Salary
+	where Employee_ID = @Employee_Id
+
+end
+
+-- delete
+Create procedure SP_deleteEmployeeData
+(
+	@Employee_Id int
+	
+)
+As
+begin
+	delete from tbl_EmployeeData where Employee_ID = @Employee_Id
+end
