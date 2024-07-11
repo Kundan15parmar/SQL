@@ -330,6 +330,7 @@ Primary Key :
 	–Primary key always integers if used with identity column.
 
 Identity : Auto increment values in primary key.
+
 Example: Create table tbl_StudentData
 (
 	Student_Id int primary key identity(1,1),
@@ -338,28 +339,36 @@ Example: Create table tbl_StudentData
 	Student_MobileNo bigint,
 	Student_DOB datetime,	
 )
-Here, Syntax:  Identity(Value , increment)
+Here,
+Syntax:  Identity(Value , increment)
             Example : Identity(1,1) 
+	    
 Value : It indicates the starting value of the row loaded into the table. By default, its value is 1.
+
 Increment: It indicates the incremental value, which is added to the identity value of the last loaded row. By default, its value is 1.
+
 Joins :   When we want to get data from one or more tables then we can use joins.
+
 Types of Joins : 
 Inner Join
 Left Join 
 Right join
 Cross join
 Self join
-Inner join:  Inner join returns common data from both tables.                                         Inner join is applied on Primary Key of parent table or column data should be unique. 
+Inner join:  Inner join returns common data from both tables.          
+		Inner join is applied on Primary Key of parent table or column data should be unique. 
+
 Syntax :	Select column1,column2, column3 from table1    
  Inner join table2 on table1.column = table2.column
 
-
  Example :	Select CM.Category_Id,Category_Name,SubCategory_Id,
-SubCategory_Name from tbl_Categorymaster CM
-Inner join tbl_SubcategoryMaster SCM 
-on CM.Category_Id = SCM.Category_ID
+		SubCategory_Name from tbl_Categorymaster CM
+		Inner join tbl_SubcategoryMaster SCM 
+		on CM.Category_Id = SCM.Category_ID
+
 Left join :    Return all records from left table and matching data from right table
 		-- First table in query is consider as a left table and second table  is consider as right table.
+
  Syntax :        Select column1,column2, column3 from table1
 		Left join table2 on table1.column = table2.column
 
@@ -367,21 +376,29 @@ Left join :    Return all records from left table and matching data from right t
  Example :	Select CM.Category_Id,Category_Name,SubCategory_Id,
 		SubCategory_Name from tbl_Categorymaster CM
 		Left join tbl_SubcategoryMaster SCM 
-on CM.Category_Id = SCM.Category_ID
+		on CM.Category_Id = SCM.Category_ID
+  
 Right join : Return all records from right table and matching data from left table
 		 - First table in query is consider as left table and second table is consider as right table.
- Syntax :	Select column1,column2, column3 from table1
+
+	 Syntax :	Select column1,column2, column3 from table1
 		Right join table2 on table1.column = table2.column
 
 
- Example :	Select CM.Category_Id,Category_Name,SubCategory_Id,
+	 Example :	Select CM.Category_Id,Category_Name,SubCategory_Id,
 		SubCategory_Name from tbl_Categorymaster CM
 		Right join tbl_SubcategoryMaster SCM
-on CM.Category_Id = SCM.Category_ID
+		on CM.Category_Id = SCM.Category_ID
+  
 Cross join : Cross join return result with one to many relation.
+
 	Syntax : Select column1,column2 from table1 cross join table2 
+ 
 	Example :	Select * from tbl_Categorymaster CM cross join tbl_OrderMaster
+ 
 Self join : Join table with itself.
+
+
 Store Procedure (SP) :
 –  SP is a special function / query that features provided by SQL.
 –  Reusability of code.
@@ -390,17 +407,19 @@ Store Procedure (SP) :
 –  Duplicate names are not allowed in SP.
 
 
-Syntax :  Create new SP
+	Syntax :  Create new SP
 	  create procedure procedure_name
-(
-Parameter
+	(
+	Parameter
 	)
-As
+	As
 	Begin
 		Insert / update/ delete / select
 	End
 	Go
-Modify SP :   alter procedure procedure_name
+
+ 
+	Modify SP :   alter procedure procedure_name
 	(
 		Parameter
 	)
@@ -409,9 +428,12 @@ Modify SP :   alter procedure procedure_name
 		Insert / update/ delete / select
 	End
 	Go
+ 
 For execution of Store procedure
-– Execution of Stored procedure without Parameters =  exec sp_SelectCategory
-– Execution of Stored procedure with Parameters = exec sp_SelectCategoryById 5
+	– Execution of Stored procedure without Parameters =  exec sp_SelectCategory
+	– Execution of Stored procedure with Parameters = exec sp_SelectCategoryById 5
+
+ 
 Assignment  Question:
 Q) Create table with name Employee Data
 		Column name :
@@ -420,6 +442,7 @@ Q) Create table with name Employee Data
 			Employee Age
 			Employee Role
 		Employee Mobile no
+  
 Create SP for employee data that select data based on employee name
 => 	Create procedure SP_SelectEmployeeData
 (
