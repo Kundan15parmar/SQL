@@ -25,8 +25,24 @@ VALUES(1,'A'),(1,'B'),(2,'A'),(2,'C'),(3,'B'),(3,'A'),(4,'A'),(4,'B'),(5,'C')
 
 select * from tbl_Customers
 sELECT * FROM tbl_Purchases
---Find the customers who bought both products A & B but did not buy Product C.
+-------------Question---------------
+--Q1) Find the customers who bought both products A & B but did not buy Product C.
 
+
+--select Customer_Id from tbl_Purchases where Product_Id = 'A'
+
+--select Customer_Id from tbl_Purchases where Product_Id = 'B'
+
+--select Customer_Id from tbl_Purchases where Product_Id = 'C'
+
+select Customer_Name from tbl_Customers
+where Customer_Id in (select Customer_Id from tbl_Purchases where Product_Id = 'A') and
+Customer_Id in (select Customer_Id from tbl_Purchases where Product_Id = 'B') and 
+Customer_Id not in (select Customer_Id from tbl_Purchases where Product_Id = 'C')
+order by Customer_Id
+
+
+--------try other way
 Select distinct ct.Customer_Name from tbl_Customers ct inner join
 tbl_Purchases ph on ct.Customer_Id = ph.Customer_Id
 where Ct.Customer_Id in
@@ -36,5 +52,4 @@ where  Product_Id in ('A','B') and Product_Id not in ('C'))
 
 Select  Customer_Name from tbl_Customers where Customer_Id in 
 (Select Customer_Id from tbl_Purchases where Product_Id in ('A','B') and Product_Id not in ('C'))
-
 
