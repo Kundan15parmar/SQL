@@ -71,7 +71,7 @@ Also add row number in select statement */
 		End
 		Else
 		begin
-			print('Select any one CRUD opration...!')
+			print('Select any one CRUD operation...!')
 		End
 	End
 
