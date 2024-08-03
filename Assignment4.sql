@@ -8,7 +8,7 @@
 		Inserted date -> New record insert
 		Deleted date -> Current date and time when delete
 		Updated date -> Current date and time when update
-		Comapny id int
+		Company id int
 		IsDeleted bit 
 
 2)	Create SP :
@@ -26,7 +26,7 @@ Also add row number in select statement */
 		Inserted datetime, 
 		Deleted datetime, 
 		Updated datetime, 
-		Comapny_Id int,
+		Company_Id int,
 		IsDeleted bit 
 	)
 
@@ -38,7 +38,7 @@ Also add row number in select statement */
 		@Inserted datetime = Null, 
 		@Deleted datetime = Null, 
 		@Updated datetime = Null, 
-		@Comapny_Id int = 1,
+		@Company_Id int = 1,
 		@IsDeleted bit = 0
 	as
 	Begin
@@ -65,7 +65,7 @@ Also add row number in select statement */
 		else if(@Operation = 'Select')
 		Begin
 			Select ROW_NUMBER() over (Order by Category_Id) as RowNumber,
-			Category_Id, Category_Name,Inserted,Updated,Comapny_Id
+			Category_Id, Category_Name,Inserted,Updated,Company_Id
 			from tbl_Category
 			Where IsDeleted = 0
 		End
