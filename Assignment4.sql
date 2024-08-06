@@ -31,7 +31,7 @@ Also add row number in select statement */
 	)
 
 
-	Alter procedure Sp_Category
+	Create procedure Sp_Category
 		@Operation nvarchar(25),
 		@Category_ID int = Null,
 		@Category_Name nvarchar(50) = Null,
