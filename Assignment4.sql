@@ -8,7 +8,7 @@
 		Inserted date -> New record insert
 		Deleted date -> Current date and time when delete
 		Updated date -> Current date and time when update
-		Company id int
+		Comapny id int
 		IsDeleted bit 
 
 2)	Create SP :
@@ -31,7 +31,7 @@ Also add row number in select statement */
 	)
 
 
-	Create procedure Sp_Category
+	Alter procedure Sp_Category
 		@Operation nvarchar(25),
 		@Category_ID int = Null,
 		@Category_Name nvarchar(50) = Null,
@@ -44,8 +44,8 @@ Also add row number in select statement */
 	Begin
 		If (@Operation = 'Insert')
 		Begin
-			Insert into tbl_Category(Category_Name,Inserted,Comapny_Id,IsDeleted)
-			values(@Category_Name,GetDate(),@Comapny_Id,@IsDeleted)
+			Insert into tbl_Category(Category_Name,Inserted,Company_Id,IsDeleted)
+			values(@Category_Name,GetDate(),@Company_Id,@IsDeleted)
 		End
 		else if(@Operation = 'Update')
 		Begin
@@ -65,7 +65,7 @@ Also add row number in select statement */
 		else if(@Operation = 'Select')
 		Begin
 			Select ROW_NUMBER() over (Order by Category_Id) as RowNumber,
-			Category_Id, Category_Name,Inserted,Updated,Company_Id
+			Category_Id, Category_Name,Inserted,Updated,Company_Id 
 			from tbl_Category
 			Where IsDeleted = 0
 		End
@@ -75,7 +75,7 @@ Also add row number in select statement */
 		End
 	End
 
-	Select * from tbl_Category
+
 
 	--Execution for Inserting data
 
@@ -96,3 +96,5 @@ Also add row number in select statement */
 	--Execution For Select 
 
 	Exec Sp_Category @Operation = 'Select'
+
+	Select * from tbl_Category
