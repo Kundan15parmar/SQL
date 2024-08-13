@@ -50,9 +50,9 @@ use KundanDB
 		End
 		else 
 		Begin
-			Select ROW_NUMBER() over (Order by Movie_categoryId) as RowNumber,
-			Movie_categoryId, category_Name,Inserted_date,Update_date,Deleted_date,IsDeleted 
+			Select Movie_categoryId, category_Name,Inserted_date,Update_date,Deleted_date
 			from tbl_MovieCategory
+			where IsDeleted = 0
 		End
 End
 
@@ -133,8 +133,9 @@ Exec Sp_MovieCategory
 		else
 		Begin
 			Select Subcategory_ID,Category_ID,Subcategory_Name,
-			Inserted_date,Update_date,Deleted_date,IsDeleted
+			Inserted_date,Update_date,Deleted_date
 			from tbl_MovieSubcategory
+			where IsDeleted = 0
 		end
 	End
 
@@ -158,6 +159,8 @@ Exec Sp_MovieCategory
 	exec Sp_MovieSubcategory @Operation = 'Update' ,@Subcategory_ID = 108 ,
 	@Subcategory_Name = 'Martial Arts'
 
+	exec Sp_MovieSubcategory @Operation = 'Update' ,@Subcategory_ID = 112 ,
+	@Subcategory_Name = 'Prophetic biography'
 
 	------Execution for Deleting data------------
 
