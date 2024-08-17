@@ -1,0 +1,188 @@
+--------------------Test2------------------
+
+Create database Test_Kundan
+
+--------------Question1------------
+
+create table tbl_StudentMaster
+(
+	Student_Id  int primary key identity(1,1),
+	Student_Name nvarchar(25),
+	Student_Age int,
+	Student_Mobile_No bigint,
+	Student_Address nvarchar(50)
+)
+
+-----------------------Question2
+
+Create table tbl_StudentDetails
+(
+	 Student_Details_Id int primary key identity(101,1),
+	 Student_Id int,
+	 Student_Marks decimal(18,2),
+	 Student_Subject nvarchar(25),
+	 Student_Class int,
+	 Constraint FK_Student_Id Foreign key(Student_Id) references tbl_StudentMaster(Student_Id)
+)
+
+---------------------Question 3---------------------------
+
+Alter table tbl_StudentMaster
+Add Student_Grade nvarchar(5)
+
+--------------------Question4 -----------------------
+/*
+Syntax: Create procedure ProcedureName
+			Parameter1,Parameter2
+		as
+		Begin
+				Statements
+		End
+		Go
+
+*/
+
+--------------------Question 5-----------------------
+
+/*
+	CTE :	Common Table Expression.
+			It is a special function that provide by SQl.
+			It is not stored in database.
+			It create at a time of execution and delete when the work is completed.
+
+	Syntax : with cte_name as
+	(
+		Select Coulmname1,Columnname2.......ColumnnameN
+		From tablename
+	)
+	select * from cte_name
+*/
+
+-----------------------Question6-----------------------
+--Delete a duplicate date from the Table Student based on name and age
+Select * from tbl_StudentMaster
+
+Insert into tbl_StudentMaster(Student_Name,Student_Age,Student_Mobile_No,Student_Address,Student_Grade)
+Values('Neha',18,9876543212,'vadodara,Gujarat','D'),
+		('Atharva',25,9876446611,'Surat,Gujarat','A'),
+		('Kalpana',19,782244355,'vdodara,Gujarat','C')
+
+----Create Cte
+
+with Cte_StudentMaster as
+(
+	Select Row_Number() over (partition by Student_Name,Student_Age order by Student_Name) as DuplicateData,
+	Student_Id,Student_Name,Student_Age,Student_Mobile_No,Student_Address,Student_Grade
+	from tbl_StudentMaster
+
+)
+Delete from Cte_StudentMaster where DuplicateData > 1 
+
+---------------------Question7------------------------------------
+--What is aggregate function? List down all aggregate functions.
+/* 
+	Aggregate Function : It is used to perform some mathematical operation.
+						Group by is required with Aggregate Function.
+						it return data into single value.
+	Types of Aggregate Function :
+	1)Sum()
+	2)Min()
+	3)max()
+	4)Avg()
+	5)Count()
+*/
+------------------------Question8--------------------------
+create procedure Sp_Student_Grade
+as
+Begin
+	Select Row_Number() over (order by Student_Grade) as Numbering,
+	Student_Id,Student_Name,Student_Age,Student_Mobile_No,Student_Address,Student_Grade
+	from tbl_StudentMaster
+end
+
+---Execution of Sp
+exec Sp_Student_Grade
+
+---------------------Question9--------------------------
+/*
+In Left join,it fetch all the data of left table and matching data from right table but in right join
+it fetch all the data of right table and matching data from left table
+
+
+Left join Syntax : Select Column1,Coulmn2 from table1 t1 left join table2 t2
+					on t1.Coulmn = t2.Column
+
+	Example : 
+				Select * from tbl_StudentMaster SM left join tbl_StudentDetails SD
+					on Sm.Student_Id = SD.Student_Id
+
+
+ Right join Syntax : Select Column1,Coulmn2 from table1 t1 Right join table2 t2
+					on t1.Coulmn = t2.Column
+
+	Example : 
+				Select * from tbl_StudentMaster SM right join tbl_StudentDetails SD
+					on Sm.Student_Id = SD.Student_Id
+
+*/
+
+-----------------Question 10-------------------------------
+
+create procedure Sp_CRUD_StudentMaster
+		@type nvarchar(25) = null,
+		@Student_Id int = null,
+		@Student_Name nvarchar(25) = null,
+		@Student_Age int = null,
+		@Student_Mobile_No bigint = null,
+		@Student_Address nvarchar(50) = null,
+		@Student_Grade nvarchar(5) = null
+as
+Begin
+		if (@type = 'Insert')
+		begin
+				insert into tbl_StudentMaster(Student_Name,Student_Age,Student_Mobile_No,Student_Address,Student_Grade)
+				values(@Student_Name,@Student_Age,@Student_Mobile_No,@Student_Address,@Student_Grade)
+		end
+		else if(@type = 'update')
+		begin
+				update tbl_StudentMaster
+				set Student_Mobile_No = @Student_Mobile_No
+				where Student_Id = @Student_Id
+		end
+		else if(@type = 'Delete')
+		Begin
+				Delete from tbl_StudentMaster where Student_Id = @Student_Id
+
+		End
+		else
+		begin
+			Select Student_Id,Student_Name,Student_Age,Student_Mobile_No,Student_Address,Student_Grade
+			from tbl_StudentMaster
+		end
+
+End
+--Execution
+Exec Sp_CRUD_StudentMaster
+
+-----------------------------------Question11-----------------------------
+
+--Create a new view to get data from student table and use that view in store procedure to get matching data with student detail table.
+
+---Create View
+create view vw_StudentMaster as
+Select Student_Id,Student_Name,Student_Age,Student_Mobile_No,Student_Address,Student_Grade
+			from tbl_StudentMaster
+
+
+---Create procedure
+create procedure Sp_GetMatchingData
+as
+Begin
+	Select VM.Student_Id,VM.Student_Name,Sd.Student_Details_Id,Sd.Student_Subject,Sd.Student_Class,Sd.Student_Marks
+	from vw_StudentMaster VM inner join tbl_StudentDetails Sd
+	on VM.Student_ID = Sd.Student_Id
+End
+
+
+----Execute Sp
+Exec Sp_GetMatchingData
