@@ -1,0 +1,49 @@
+Table Structure
+	1. Category Master
+		Category Id primary key identity key
+		Category name
+
+create table tbl_CategoryMaster
+(
+     Category_Id int primary key identity (1, 1), 
+     Category_Name nvarchar(25) 
+) 
+
+
+	2. Sub category Master
+		Subcategory Id primary key identity key
+		Category Id Foreign key (Category Master)
+		SubCategroy Name
+
+ create table tbl_SubcategoryMaster
+(
+     Subcategory_Id int primary key identity (1, 1), 
+     Category_Id int, 
+     Subcategory_Name nvarchar(25), 
+     constraint FK_Category_Id Foreign key references tbl_CategoryMaster (Category Id) 
+) 
+
+
+	3. Employee Master
+		Employee Id primary key identity key
+		Employee Name
+		Employee Age
+		Employee Mobile no
+		Employee Address
+
+
+
+
+	4. Student Master
+		Student Id primary key identity key
+		Student Name
+		Student Age
+		Student Mobile No
+		Student Address
+
+	5. Student Detail
+		Student detail Id primary key identity key
+		Student Id foreign key (Student Master)
+		Student Marks
+		Student Subject
+		Student Class
