@@ -31,7 +31,14 @@ create table tbl_CategoryMaster
 		Employee Mobile no
 		Employee Address
 
-
+Create table tbl_EmployeeMaster
+(
+   Employee_Id int primary key identity (1, 1), 
+   Employee_Name nvarchar(25), 
+   Employee_Age int, 
+   Employee_Mobile bigint, 
+   Employee_Address nvarchar(50) 
+) 
 
 
 	4. Student Master
@@ -40,6 +47,14 @@ create table tbl_CategoryMaster
 		Student Age
 		Student Mobile No
 		Student Address
+Create table tbl_StudentMaster
+(
+   Student_Id int primary key identity (1, 1), 
+   Student_Name nvarchar (25), 
+   Student_Age int, 
+   Student_MobileNo bigint, 
+   Student_Address nvarchar(50) 
+) 
 
 	5. Student Detail
 		Student detail Id primary key identity key
@@ -47,3 +62,13 @@ create table tbl_CategoryMaster
 		Student Marks
 		Student Subject
 		Student Class
+
+Create table tbl_StudentDetail
+(
+   Student_Detail_Id int primary key identity (1, 1), 
+   Student_Id int, 
+   Student_Marks decimal (18, 2), 
+   Student_Subject nvarchar(25), 
+   Student_Class int, 
+   Constraint FK_StudentId Foreign key references tbl_StudentMaster(Student_Id) 
+) 
