@@ -10,7 +10,8 @@ from tbl_EmployeeData
 
 Select Len(Employee_Name) as Name_Length,
 CHARINDEX(' ',Employee_Name) as PreSpace ,
-Len(Employee_Name) - CHARINDEX(' ',Employee_Name) as lenthAfterPrespace from tbl_EmployeeData
+Len(Employee_Name) - CHARINDEX(' ',Employee_Name) as lenthAfterPrespace 
+from tbl_EmployeeData
 
 /*
 --Not work
@@ -18,3 +19,14 @@ Select LEFT(Employee_Name,CHARINDEX(' ',Employee_Name)) as FirstName,
 Right(Employee_Name,CHARINDEX(' ',Employee_Name)) as LastName
 from tbl_EmployeeData
 */
+
+
+--***Question) How User name is seperate in form of First name,Middle Name and last name---
+
+SELECT 
+  LEFT(Employee_Name, CHARINDEX(' ', Employee_Name)) AS first_name,
+  SUBSTRING(Employee_Name, CHARINDEX(' ', Employee_Name) + 1, 
+  CHARINDEX(' ', Employee_Name, CHARINDEX(' ', Employee_Name) + 1) - CHARINDEX(' ', Employee_Name) - 1) AS middle_name,
+  RIGHT(Employee_Name, LEN(Employee_Name) - CHARINDEX(' ', Employee_Name, CHARINDEX(' ', Employee_Name) + 1)) AS last_name
+FROM 
+  tbl_EmployeeData
