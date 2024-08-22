@@ -20,7 +20,7 @@ create table tbl_CategoryMaster
      Subcategory_Id int primary key identity (1, 1), 
      Category_Id int, 
      Subcategory_Name nvarchar(25), 
-     constraint FK_Category_Id Foreign key references tbl_CategoryMaster (Category Id) 
+     constraint FK_Category_Id Foreign key (Category_Id) references tbl_CategoryMaster (Category Id) 
 ) 
 
 
@@ -70,5 +70,5 @@ Create table tbl_StudentDetail
    Student_Marks decimal (18, 2), 
    Student_Subject nvarchar(25), 
    Student_Class int, 
-   Constraint FK_StudentId Foreign key references tbl_StudentMaster(Student_Id) 
+   Constraint FK_StudentId Foreign key (Student_Id) references tbl_StudentMaster(Student_Id) 
 ) 
