@@ -20,7 +20,7 @@ create table tbl_CategoryMaster
      Subcategory_Id int primary key identity (1, 1), 
      Category_Id int, 
      Subcategory_Name nvarchar(25), 
-     constraint FK_Category_Id Foreign key (Category_Id) references tbl_CategoryMaster (Category Id) 
+     constraint FK_Category_Id Foreign key (Category_Id) references tbl_CategoryMaster (Category_Id) 
 ) 
 
 
