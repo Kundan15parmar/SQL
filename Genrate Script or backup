@@ -1,0 +1,46 @@
+------------------for Genrate Script or backup -> 17/aug/2024--
+
+We transfer file by 2 ways 
+1) Using creating script (extension .sql)
+2) Using Backup (Extension .bak)
+
+Limitation of backup file :
+---Version problem:
+if we create backup file in version 2022 and send someone who used lower than version 2022 than backup file not restore beacuse problem in version.
+
+---Limitation of  generate file
+Any one can open this file
+if we want to transfer large amount of data to user than we generate script which consume more memory compare to back file.
+
+
+--- Create Generate Script File
+
+Step1 : right click on your database -> Tasks ->  select Generate script -> Next
+
+Step2 : Select the database object in script.
+      (You have 2 option. First Script entrie database and all database objects and second Select Specific database objects.) -> Next
+
+Step3 : Specify How scripts should be saved.
+        (Save as a script file -> Select path and write file name)
+
+  Click on Advances -> ->  types of data to script ->  Select Schema and data
+  (Schema only :  only struture will generate as a script,
+   Schema and data : Both Struture and Records  will generate as a script,
+   Data only : only records will generate as a script(Only tables records no any view,procedure, function or index) )
+ -> ok -> Next -> Finish
+
+
+
+-------Access Generated script into sql server
+
+
+
+
+
+
+
+
+
+
+
+
