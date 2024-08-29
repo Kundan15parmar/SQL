@@ -31,7 +31,24 @@ Step3 : Specify How scripts should be saved.
 
 
 
--------Access Generated script into sql server
+-------Access Generated script into sql server---------
+
+Step1 :  open your SQL Generating Script in your Sql Server and just execute it.
+
+
+-----Create Backup File----------
+
+Step1 : right click on your database -> Tasks ->  select backup script -> Select Backup type (full) -> path where you want to backup -> ok
+
+----- restore backup file---------
+
+Step 1: open sql
+Step 2 : create database
+Step 3 :right click on database folder -> restore datase -> select database -> ok
+
+
+
+
 
 
 
