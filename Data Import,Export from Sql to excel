@@ -1,0 +1,11 @@
+----------Data Import/Exort
+
+---For to covert sql data into Excel transfer----
+Step1 : Right click on database which you want to Export.
+Task -> Export data -> Click on next -> Choose a data source(Microsoft OLE DB Provider for SQL Server) -> Select Database which you want to transfer -> Click on next
+
+Step2 : Choose the Destination ->Destination (Microsoft Excel)-> Browse (Select path(Folder) where you want to copy your SQL Data) -> file name -> open -> click on next
+
+Step 3 : Specify table copy or query -> Select write query to specify the data to transfer -> next -> Select * from tablename -> next 
+
+Step 4 : click on preview if you want to see how many data are transfer -> next -> next -> next -> finish 
