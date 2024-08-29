@@ -1,0 +1,16 @@
+---------Import/Export File from github--------
+
+Step1 : Install github desktop application in your Computer and open your account.
+
+Step2: Click on code -> Copy url link which you want to share.
+
+Step3 : File -> Clone repository -> GitHub.com -> Select the repository which you want to clone it on your desktop.
+
+Step4 : Select Local path where you want to share you github repository. -> click on Clone
+
+Step5 : if you generate new files in a folder of Computer than its automatic reflect on your GitHub app -> Commit to main ->Push origin
+
+
+
+In repository tab - > Click on Pull (means the file in your github app is directly fetch in your local computer)
+                  ->   Click on Push (means the file in your local computer is directly fetch in your github app)
