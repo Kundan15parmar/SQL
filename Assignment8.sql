@@ -12,16 +12,16 @@ use SQLPracDb
 		(
 			@Marks int
 		)
-		Returns nvarchar(100)
+		Returns nvarchar(50)
 		as
 		Begin
-			declare @Grade nvarchar(100)
+			declare @Grade nvarchar(50)
 			
 			Set @Grade = 
 			Case
 				when  @Marks > 100 then  'Invalid marks. Marks should be less than 100'
-				when  @Marks > 80 and @Marks <= 90  then  'A'
-				when  @Marks > 70 and @Marks <= 80  then   'B'
+				when  @Marks > 90 and @Marks <= 100  then  'A'
+				when  @Marks > 70 and @Marks <= 90  then  'B'
 				when  @Marks > 60 and @Marks <= 70  then  'C'
 				when  @Marks > 50 and @Marks <= 60  then  'D'
 				when  @Marks > 35 and @Marks <= 50  then  'E'
@@ -35,7 +35,7 @@ use SQLPracDb
 
 	Select dbo.fn_GetGrade(120) as StudentGrade
 
-	Select dbo.fn_GetGrade(46) as StudentGrade
+	Select dbo.fn_GetGrade(96) as StudentGrade
 		
 ----2) Using if elseif----------------
 
