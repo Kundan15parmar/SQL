@@ -30,3 +30,21 @@ SELECT
   RIGHT(Employee_Name, LEN(Employee_Name) - CHARINDEX(' ', Employee_Name, CHARINDEX(' ', Employee_Name) + 1)) AS last_name
 FROM 
   tbl_EmployeeData
+
+
+
+--------by using String_Split()
+
+	
+DECLARE @fullName nVARCHAR(100) = 'Kundan Natvarbhai Parmar';
+
+WITH SplitNames AS (
+  SELECT value, ROW_NUMBER() OVER (ORDER BY (SELECT 1)) AS Position
+  FROM STRING_SPLIT(@fullName, ' ')
+)
+SELECT 
+  MAX(CASE WHEN Position = 1 THEN value END) AS FirstName,
+  MAX(CASE WHEN Position = 2 THEN value END) AS MiddleName,
+  MAX(CASE WHEN Position = 3 THEN value END) AS LastName
+FROM SplitNames;
+
