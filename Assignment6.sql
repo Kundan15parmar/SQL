@@ -48,3 +48,22 @@ SELECT
   MAX(CASE WHEN Position = 3 THEN value END) AS LastName
 FROM SplitNames;
 
+
+
+------on live data
+
+WITH SplitNames AS (
+  SELECT Employee_ID, value, ROW_NUMBER() OVER (PARTITION BY Employee_ID ORDER BY (SELECT 1)) AS Position
+  FROM tbl_EmployeeData
+  CROSS APPLY STRING_SPLIT(Employee_Name, ' ')
+)
+SELECT 
+  Employee_ID,
+  MAX(CASE WHEN Position = 1 THEN value END) AS FirstName,
+  MAX(CASE WHEN Position = 2 THEN value END) AS MiddleName,
+  MAX(CASE WHEN Position = 3 THEN value END) AS LastName
+FROM SplitNames
+GROUP BY Employee_ID
+
+
+
