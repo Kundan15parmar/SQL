@@ -5,20 +5,20 @@ select * from tbl_StudentData
 
 ---SUM()
 
-Select Sum(Student_Mark) as Student_MArk from tbl_StudentData
+Select Sum(Student_Mark) as Student_Mark from tbl_StudentData
 
 ---MIN()
 
-Select MIN(Student_Mark) as Student_MArk from tbl_StudentData
+Select MIN(Student_Mark) as Student_Mark from tbl_StudentData
 
 ---MAX()
 
-Select MAX(Student_Mark) as Student_MArk from tbl_StudentData
+Select MAX(Student_Mark) as Student_Mark from tbl_StudentData
 
 ---AVG()
 select * from tbl_StudentData
 -- Note : IF the value is NULL than it not count that value.
-Select AVG(Student_Mark) as Student_MArk from tbl_StudentData
+Select AVG(Student_Mark) as Student_Mark from tbl_StudentData
 
 ---COUNT()
 

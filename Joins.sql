@@ -65,11 +65,10 @@ from tbl_categoryMaster CM cross join tbl_subCategoryMaster SCM
 
 
 
---self join(pending)
+--self join :
+
+select emp.Employee_ID, emp.Employee_Name,manager.Employee_Name as Manager_Name
+from tbl_EmployeeData emp,tbl_EmployeeData manager
+where manager.Employee_ID = emp.Manager_ID
 
 
-
-select S1.subCategory_Name as SubCategoryName1,S2.subCategory_Name as SubCategoryName2,S1.Category_ID
-from tbl_subCategoryMaster S1 ,tbl_subCategoryMaster S2
-where  S1.subCategory_ID = S2.subCategory_ID
-order by S1.category_ID

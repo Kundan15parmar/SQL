@@ -96,12 +96,15 @@ Use KundanDB
 
 		Select Employee_Name, CHARINDEX(' ',Employee_Name,CHARINDEX(' ',Employee_Name) +1) -1 as PreSpace from tbl_EmployeeData
 
---16) Replace
+	--16) Replace
 
 		Select REPLACE('Kundan parmar','p','P')
 
 		Select Employee_Name,REPLACE(Employee_Name,'a','A') from tbl_EmployeeData
 
+	--17) String_Split
+
+		Select value from string_split('Kundan Natvarbhai Parmar',' ') 
 
 
 --***Question) How User name is seperate in form of First name and last name---

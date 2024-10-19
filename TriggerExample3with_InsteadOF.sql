@@ -1,5 +1,7 @@
 select * from sys.tables
 
+use KundanDB
+
 create table tbl_ApprovedCategoryMaster
 (
 	category_ID int primary key identity(1,1),

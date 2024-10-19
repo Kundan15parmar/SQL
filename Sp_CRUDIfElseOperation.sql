@@ -33,6 +33,7 @@
 -- exec SP_CRUDIfElseOperation ''
 
 -- Example Of CRUD operation in SP using Insert,update,Select and delete from table
+
 Select * from tbl_BookDetails
 
 Alter procedure SP_CRUDIfElseOperation
