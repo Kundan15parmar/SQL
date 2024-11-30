@@ -436,7 +436,7 @@ Select * from tbl_Product
 				End
 
 			----Create trigger when Status is approved than data insert into original table
-			Create trigger tr_InsertRequestOrderDetail_Log
+			Alter trigger tr_InsertRequestOrderDetail_Log
 			on tbl_RequestOrderDetail_Log
 			After update
 			as
@@ -449,6 +449,11 @@ Select * from tbl_Product
 				begin
 					Insert into tbl_OrderDetail(OrderID,ProductID,Quantity,UnitPrice)
 					Select OrderId,ProductID,Quantity,UnitPrice from inserted
+
+					update tbl_Product
+					set StockQuantity = p.StockQuantity - o.Quantity
+					from tbl_Product p ,tbl_OrderDetail o
+					where p.ProductID =o.ProductID
 				End
 			End
 
@@ -459,12 +464,12 @@ Select * from tbl_Product
 			---------Insert into view
 
 			insert into	vw_SelectRequestOrderDetail_Log(OrderId,ProductID,Quantity,UnitPrice,created_date,Status)
-			values(102,2,9,15.99,GETDATE(),'Pending For Approval')
+			values(104,4,10,15.99,GETDATE(),'Pending For Approval')
 
 			Select * from tbl_Product
 
 			update tbl_RequestOrderDetail_Log
-			set Status ='Approved' where OrderId = 102
+			set Status ='Approved' where OrderId = 104
 
 
 
