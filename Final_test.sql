@@ -279,6 +279,35 @@ Select * from tbl_Product
 	
 	)
 
+--------For insert data into tbl_OrderDetail
+	Alter procedure Sp_InsertOrderDetail
+		(		
+				@OrderID int,
+				@ProductID int,
+				@Quantity int
+		)
+		As
+		Begin
+			begin try
+				begin transaction
+			Declare @UnitPrice decimal(18,2)
+
+			Select @UnitPrice = Price  from tbl_Product
+
+			Insert into tbl_OrderDetail(OrderID,ProductID,Quantity,UnitPrice)
+			Values(@OrderID,@ProductID,@Quantity,@UnitPrice)
+				Commit transaction
+			end try
+			Begin Catch
+					declare @Error_Message nvarchar(max)
+					set @Error_Message = ERROR_MESSAGE()
+					raiserror(@Error_Message,16,1)
+			End Catch
+		End
+
+		Exec Sp_InsertOrderDetail @OrderID=105,@ProductID=3,@Quantity=5
+
+		select * from tbl_OrderDetail
 	----------------Question 8---------------------
 	--	8. Create a trigger(Insert, Update, and Delete) to maintain the log for the OrderDetail table.
 
@@ -315,9 +344,6 @@ Select * from tbl_Product
 			values('Order Sucessfully Placed...!',@OrderDetailID,@ProductID,@Quantity,@UnitPrice,GETDATE(),'Pending for Approval')
 		End
 
-		-------------------
-		insert into tbl_OrderDetail(OrderID,ProductID,Quantity,UnitPrice)
-		values(101,1,4,1500)
 
 
 		--------------Trigger for update
@@ -385,9 +411,6 @@ Select * from tbl_Product
 	/*	9. Maintain stock in the Product table using the trigger once the order is confirmed in the
 			OrderDetail table.*/
 
-				/*	9. Maintain stock in the Product table using the trigger once the order is confirmed in the
-			OrderDetail table.*/
-
 			Select * from tbl_Product
 			Select * from tbl_OrderDetail
 
@@ -412,7 +435,7 @@ Select * from tbl_Product
 
 
 		--Create trigger,execute when data insert into view
-				create trigger tr_vw_SelectRequestOrderDetail_Log
+				Alter trigger tr_vw_SelectRequestOrderDetail_Log
 				on vw_SelectRequestOrderDetail_Log
 				Instead of Insert
 				as
@@ -431,7 +454,7 @@ Select * from tbl_Product
 								@UnitPrice = UnitPrice
 								from inserted
 
-					Insert into vw_SelectRequestOrderDetail_Log(OrderDetailID,OrderId,ProductID,Quantity,UnitPrice,created_date,Status)
+					Insert into tbl_RequestOrderDetail_Log(OrderDetailID,OrderId,ProductID,Quantity,UnitPrice,created_date,Status)
 					values(@OrderDetailID,@OrderID,@ProductID,@Quantity,@UnitPrice,getdate(),'Pending for Approval..!')
 				End
 
